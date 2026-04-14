@@ -54,4 +54,5 @@ app.listen(PORT, () => {
     console.log(`Server is up and running on port ${PORT}!!`);
 });
 
-//NOTE-- Tried connecting to database, facing querySrv ECONNREFUSED error
+//NOTE-- Fixed the querySrv error by using standard connection string(without srv) instead of srv connection string...
+//    -- The problem arised due to network restrictions by ISP
