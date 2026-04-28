@@ -28,6 +28,16 @@ const signup = async(req, res) => {
         if(UserExists) {
             return res.status(400).json({message: 'User already exists'});
         }
+
+        //If user doesnt exist, adding user in the database.. 
+
+        const user = await User.create({
+            name,
+            email,
+            password,
+            monthlyBudget: monthlyBudget || 0 //Monthly budget defaults to 0, if user doesnt provide one.. 
+        });
+
         
     }
 }
