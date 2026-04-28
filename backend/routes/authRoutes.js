@@ -1,3 +1,5 @@
+// API endpoint = An API endpoint is a specific URL on your backend where the frontend can send requests.
+
 // This file maps API endpoints to the correct controller functions.
 
 const express = require('express'); //Import express
