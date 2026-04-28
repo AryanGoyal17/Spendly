@@ -13,6 +13,7 @@ const generateToken = (id) => {
     });
 };
 
+///////////////////////3-- Signup controller
 
 // @desc Register a new user(signup)
 // @route POST /api/auth/signup
@@ -57,3 +58,38 @@ const signup = async(req, res) => {
         res.status(500).json({message: error.message});
     }
 };
+
+///////////////////////3-- Login controller
+
+// @desc Login(User-Authentication)
+// @route POST /api/auth/login
+
+const login = async(req,res) => {
+
+    try{
+
+    const{email, password} = req.body;
+
+    //Finding the user by email.. 
+
+    const user = await User.findOne({email}).select("+password");
+
+    if(user && (await user.matchPassword(password))) {
+        res.json({
+            _id: user._id,
+            name: user.name,
+            email: user.email,
+            monthlyBudget: user.monthlyBudget,
+            token: generateToken(user._id),
+        })
+    }
+
+    else{
+        res.status(401).json({message: 'Invalid email or password'});
+    }
+
+    } catch(error){
+        res.status(500).json({message: error.message});
+    }
+};
+
