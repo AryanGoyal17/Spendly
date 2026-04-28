@@ -13,3 +13,21 @@ const generateToken = (id) => {
     });
 };
 
+
+// @desc Register a new user(signup)
+// @route POST /api/auth/signup
+
+const signup = async(req, res) => {
+    try{
+        const{name, email, password, monthlyBudget} = req.body;
+
+        //Checking if user already exists!
+
+        const UserExists = await User.findOne({email});
+
+        if(UserExists) {
+            return res.status(400).json({message: 'User already exists'});
+        }
+        
+    }
+}
