@@ -21,7 +21,7 @@ const signup = async(req, res) => {
     try{
         const{name, email, password, monthlyBudget} = req.body;
 
-        //Checking if user already exists!
+        //1-- Checking if user already exists!
 
         const UserExists = await User.findOne({email});
 
@@ -29,7 +29,7 @@ const signup = async(req, res) => {
             return res.status(400).json({message: 'User already exists'});
         }
 
-        //If user doesnt exist, adding user in the database.. 
+        //2-- If user doesnt exist, adding user in the database.. 
 
         const user = await User.create({
             name,
@@ -38,6 +38,22 @@ const signup = async(req, res) => {
             monthlyBudget: monthlyBudget || 0 //Monthly budget defaults to 0, if user doesnt provide one.. 
         });
 
-        
+        //3-- Sending the user data along with the token to the user after signup 
+
+        if(user){
+             res.status(201).json({
+                _id: user._id,
+                name: user.name,
+                email: user.email,
+                monthlyBudget: user.monthlyBudget,
+                token: generateToken(user._id),
+             });
+        } 
+
+        else{
+            res.status(400).json({message: 'Invalid user data'});
+        }
+    } catch(error){
+        res.status(500).json({message: error.message});
     }
-}
+};
