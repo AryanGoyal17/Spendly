@@ -1,5 +1,4 @@
-const express = require('express')
-const jwt = require('jwtwebtoken')
+const jwt = require('jsonwebtoken')
 const User = require('../models/User')
 
 
@@ -9,7 +8,7 @@ const protect = async(req, res, next) => {
 
     let token; 
 
-    if(req.headers.authorization && req.headers.authorization.startswith('Bearer')){ // Token sent format -- understood.. 
+    if(req.headers.authorization && req.headers.authorization.startsWith('Bearer')){ // Token sent format -- understood.. 
 
         try{
 
