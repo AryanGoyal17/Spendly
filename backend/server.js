@@ -3,6 +3,8 @@
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose'); 
+
+const authRoutes = require('./routes/authRoutes')
 require('dotenv').config(); //Loading hidden variables from .env file
 
 //2-- Initializing the express application 
@@ -37,7 +39,7 @@ mongoose.connect(dbURI)
         console.error(`Error connecting to MongoDB Atlas`, error.message);
        })
 
-
+app.use('/api/auth', authRoutes);
 //6-- Creating a test route --
 
 app.get('/ping', (req, res) => {
