@@ -1,11 +1,13 @@
 import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
 const Signup = () => {
   const [formData, setFormData] = useState({ name: '', email: '', password: '' });
   const [error, setError] = useState('');
   const navigate = useNavigate();
+  const { login } = useAuth();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -15,7 +17,10 @@ const Signup = () => {
     e.preventDefault();
     try {
       const response = await axios.post('http://localhost:5000/api/auth/signup', formData);
-      localStorage.setItem('token', response.data.token);
+      login(
+        { _id: response.data._id, name: response.data.name, email: response.data.email, monthlyBudget: response.data.monthlyBudget }, 
+        response.data.token
+      );
       navigate('/dashboard');
     } catch (err) {
       setError(err.response?.data?.message || 'Something went wrong');
