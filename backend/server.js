@@ -4,7 +4,8 @@ const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose'); 
 
-const authRoutes = require('./routes/authRoutes')
+const authRoutes = require('./routes/authRoutes');
+const expenseRoutes = require('./routes/expenseRoutes');
 require('dotenv').config(); //Loading hidden variables from .env file
 
 //2-- Initializing the express application 
@@ -40,6 +41,7 @@ mongoose.connect(dbURI)
        })
 
 app.use('/api/auth', authRoutes);
+app.use('/api/expenses', expenseRoutes);
 //6-- Creating a test route --
 
 app.get('/ping', (req, res) => {
