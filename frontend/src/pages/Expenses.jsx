@@ -9,15 +9,30 @@ const Expenses = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   
+  // Filter State
+  const [filters, setFilters] = useState({
+    category: '',
+    startDate: '',
+    endDate: ''
+  });
+
   // Modal State
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [expenseToEdit, setExpenseToEdit] = useState(null);
 
-  // Function to fetch the data from our backend
   const fetchExpenses = async () => {
     setLoading(true);
     try {
-      const response = await axios.get('http://localhost:5000/api/expenses', {
+      // Safely build the query string based on active filters
+      const params = new URLSearchParams();
+      if (filters.category) params.append('category', filters.category);
+      if (filters.startDate) params.append('startDate', filters.startDate);
+      if (filters.endDate) params.append('endDate', filters.endDate);
+      
+      const queryString = params.toString();
+      const url = `http://localhost:5000/api/expenses${queryString ? `?${queryString}` : ''}`;
+      
+      const response = await axios.get(url, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setExpenses(response.data);
@@ -29,10 +44,10 @@ const Expenses = () => {
     }
   };
 
-  // Run the fetch function exactly once when the component loads
+  // Re-fetch automatically whenever a filter changes
   useEffect(() => {
     fetchExpenses();
-  }, [token]);
+  }, [token, filters.category, filters.startDate, filters.endDate]);
 
   const handleDelete = async (id) => {
     if (!window.confirm('Are you sure you want to delete this expense?')) return;
@@ -41,20 +56,28 @@ const Expenses = () => {
       await axios.delete(`http://localhost:5000/api/expenses/${id}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
-      fetchExpenses(); // Refresh the list automatically
+      fetchExpenses();
     } catch (err) {
       alert('Failed to delete expense');
     }
   };
 
   const handleEdit = (expense) => {
-    setExpenseToEdit(expense); // Pass the data to the modal
+    setExpenseToEdit(expense);
     setIsModalOpen(true);
   };
 
   const handleOpenNew = () => {
-    setExpenseToEdit(null); // Clear the modal data
+    setExpenseToEdit(null);
     setIsModalOpen(true);
+  };
+
+  const handleFilterChange = (e) => {
+    setFilters({ ...filters, [e.target.name]: e.target.value });
+  };
+
+  const clearFilters = () => {
+    setFilters({ category: '', startDate: '', endDate: '' });
   };
 
   return (
@@ -69,12 +92,60 @@ const Expenses = () => {
         </button>
       </div>
 
+      {/* --- FILTER BAR --- */}
+      <div className="bg-gray-800 p-4 rounded mb-6 flex flex-wrap gap-4 items-end">
+        <div>
+          <label className="text-gray-400 text-sm mb-1 block">Category</label>
+          <select 
+            name="category" 
+            value={filters.category} 
+            onChange={handleFilterChange} 
+            className="w-full p-2 rounded bg-gray-700 text-white"
+          >
+            <option value="">All Categories</option>
+            <option value="Food">Food</option>
+            <option value="Transport">Transport</option>
+            <option value="Shopping">Shopping</option>
+            <option value="Entertainment">Entertainment</option>
+            <option value="Health">Health</option>
+            <option value="Education">Education</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+        <div>
+          <label className="text-gray-400 text-sm mb-1 block">From</label>
+          <input 
+            type="date" 
+            name="startDate" 
+            value={filters.startDate} 
+            onChange={handleFilterChange} 
+            className="w-full p-2 rounded bg-gray-700 text-white" 
+          />
+        </div>
+        <div>
+          <label className="text-gray-400 text-sm mb-1 block">To</label>
+          <input 
+            type="date" 
+            name="endDate" 
+            value={filters.endDate} 
+            onChange={handleFilterChange} 
+            className="w-full p-2 rounded bg-gray-700 text-white" 
+          />
+        </div>
+        <button 
+          onClick={clearFilters} 
+          className="bg-gray-600 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded h-[40px]"
+        >
+          Clear Filters
+        </button>
+      </div>
+
       {error && <p className="text-red-500 mb-4">{error}</p>}
 
       {loading ? (
         <p className="text-gray-400">Loading expenses...</p>
       ) : expenses.length === 0 ? (
-        <p className="text-gray-400">No expenses yet. Add your first one!</p>
+        <p className="text-gray-400">No expenses found matching your criteria.</p>
       ) : (
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse">
@@ -90,7 +161,6 @@ const Expenses = () => {
             <tbody>
               {expenses.map((expense) => (
                 <tr key={expense._id} className="border-b border-gray-800 hover:bg-gray-800">
-                  {/* Clean up the ugly ISO date format */}
                   <td className="p-3">{new Date(expense.date).toLocaleDateString()}</td>
                   <td className="p-3">
                     <span className="bg-gray-700 px-2 py-1 rounded text-sm">{expense.category}</span>
