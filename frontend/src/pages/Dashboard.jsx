@@ -1,8 +1,46 @@
+import { useAuth } from '../context/AuthContext';
+import SummaryCards from '../components/SummaryCards';
+import ExpensePieChart from '../components/ExpensePieChart';
+import ExpenseBarChart from '../components/ExpenseBarChart';
+
 const Dashboard = () => {
+  const { user } = useAuth(); // Grab the logged-in user to say hello
+  
+  // Format today's date nicely: e.g., "Monday, July 24, 2026"
+  const todayDate = new Date().toLocaleDateString('en-US', {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  });
+
   return (
     <div className="p-8 text-white bg-gray-900 min-h-screen">
-      <h1 className="text-3xl font-bold">Dashboard</h1>
-      <p className="mt-4 text-gray-400">Welcome to your dashboard. We will build charts here soon!</p>
+      
+      {/* Top: Welcome Message + Current Date */}
+      <div className="mb-8">
+        <h1 className="text-3xl font-bold">
+          Welcome back, {user?.name || 'User'}! 👋
+        </h1>
+        <p className="text-gray-400 mt-2">{todayDate}</p>
+      </div>
+
+      {/* Row 1: Summary Cards Grid */}
+      <SummaryCards />
+
+      {/* Row 2: Charts Grid (Pie Chart left, Bar Chart right) */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+        <ExpensePieChart />
+        <ExpenseBarChart />
+      </div>
+
+      {/* Row 3: Budget Status Bar (Placeholder for Next Step) */}
+      <div className="bg-gray-800 p-6 rounded-lg shadow-md border border-gray-700 border-dashed flex items-center justify-center">
+        <h3 className="text-xl font-bold text-gray-500">
+          Budget Status Bar (Coming in Step 5!)
+        </h3>
+      </div>
+      
     </div>
   );
 };
