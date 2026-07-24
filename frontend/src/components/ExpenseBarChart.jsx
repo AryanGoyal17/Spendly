@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useAuth } from '../context/AuthContext';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from 'recharts';
+import Spinner from './Spinner';
 
 const ExpenseBarChart = () => {
   const { token } = useAuth();
@@ -69,7 +70,7 @@ const ExpenseBarChart = () => {
     fetchSixMonthExpenses();
   }, [token]);
 
-  if (loading) return <div className="text-gray-400">Loading chart...</div>;
+  if (loading) return <Spinner message="Loading chart..." />;
 
   return (
     <div className="bg-gray-800 p-6 rounded-lg shadow-md h-96">

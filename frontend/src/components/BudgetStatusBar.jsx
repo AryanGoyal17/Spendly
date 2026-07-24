@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useAuth } from '../context/AuthContext';
+import Spinner from './Spinner';
 
 const BudgetStatusBar = () => {
   const { token } = useAuth();
@@ -43,7 +44,7 @@ const BudgetStatusBar = () => {
     fetchData();
   }, [token]);
 
-  if (loading) return <div className="text-gray-400 p-6 text-center">Loading budget status...</div>;
+  if (loading) return <Spinner message="Loading budget status..." />;
 
   // Calculate percentage (prevent dividing by zero)
   const percentage = budget > 0 ? (spent / budget) * 100 : 0;

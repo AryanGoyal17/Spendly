@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useAuth } from '../context/AuthContext';
+import Spinner from './Spinner';
 
 const SummaryCards = () => {
   const { token } = useAuth();
@@ -73,7 +74,7 @@ const SummaryCards = () => {
     fetchCurrentMonthExpenses();
   }, [token]);
 
-  if (loading) return <div className="text-gray-400">Loading summary...</div>;
+  if (loading) return <Spinner message="Loading summary..." />;
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">

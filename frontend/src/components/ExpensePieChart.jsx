@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useAuth } from '../context/AuthContext';
 import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import Spinner from './Spinner';
 
 // Distinct colors for different categories
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#AF19FF', '#FF1919', '#19FFD5'];
@@ -55,7 +56,7 @@ const ExpensePieChart = () => {
     fetchCurrentMonthExpenses();
   }, [token]);
 
-  if (loading) return <div className="text-gray-400">Loading chart...</div>;
+  if (loading) return <Spinner message="Loading chart..." />;
 
   if (data.length === 0) {
     return (

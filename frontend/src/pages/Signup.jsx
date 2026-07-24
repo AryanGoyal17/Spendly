@@ -6,6 +6,7 @@ import { useAuth } from '../context/AuthContext';
 const Signup = () => {
   const [formData, setFormData] = useState({ name: '', email: '', password: '' });
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { login } = useAuth();
 
@@ -15,6 +16,7 @@ const Signup = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       const response = await axios.post('http://localhost:5000/api/auth/signup', formData);
       login(
@@ -24,6 +26,8 @@ const Signup = () => {
       navigate('/dashboard');
     } catch (err) {
       setError(err.response?.data?.message || 'Something went wrong');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -35,7 +39,9 @@ const Signup = () => {
         <input type="text" name="name" value={formData.name} placeholder="Name" onChange={handleChange} required className="w-full mb-4 p-2 rounded bg-gray-700 text-white" />
         <input type="email" name="email" value={formData.email} placeholder="Email" onChange={handleChange} required className="w-full mb-4 p-2 rounded bg-gray-700 text-white" />
         <input type="password" name="password" value={formData.password} placeholder="Password" onChange={handleChange} required className="w-full mb-6 p-2 rounded bg-gray-700 text-white" />
-        <button type="submit" className="w-full bg-green-500 text-white p-2 rounded font-bold hover:bg-green-600">Sign Up</button>
+        <button type="submit" disabled={loading} className="w-full bg-green-500 text-white p-2 rounded font-bold hover:bg-green-600 disabled:opacity-50 transition-opacity">
+          {loading ? 'Signing Up...' : 'Sign Up'}
+        </button>
         <p className="text-gray-400 text-sm mt-4 text-center">
           Already have an account? <Link to="/" className="text-green-400 hover:underline">Log in</Link>
         </p>

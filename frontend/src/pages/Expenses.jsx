@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useAuth } from '../context/AuthContext';
 import AddExpenseModal from '../components/AddExpenseModal';
+import Spinner from '../components/Spinner';
 
 const Expenses = () => {
   const { token } = useAuth();
@@ -143,7 +144,7 @@ const Expenses = () => {
       {error && <p className="text-red-500 mb-4">{error}</p>}
 
       {loading ? (
-        <p className="text-gray-400">Loading expenses...</p>
+        <Spinner message="Loading expenses..." />
       ) : expenses.length === 0 ? (
         <p className="text-gray-400">No expenses found matching your criteria.</p>
       ) : (
