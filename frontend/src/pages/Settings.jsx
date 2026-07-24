@@ -50,42 +50,42 @@ const Settings = () => {
   };
 
   return (
-    <div className="p-8 text-white bg-gray-900 min-h-screen">
+    <div className="p-8 text-gray-900 dark:text-white bg-gray-50 dark:bg-gray-900 min-h-screen transition-colors">
       <div className="max-w-4xl mx-auto">
         <h1 className="text-3xl font-bold mb-8">Settings</h1>
         
         {/* Profile Section */}
-        <div className="bg-gray-800 p-6 rounded-lg shadow-md border border-gray-700 mb-8">
-          <h2 className="text-xl font-bold text-white mb-4">Profile</h2>
+        <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md border border-gray-200 dark:border-gray-700 mb-8 transition-colors">
+          <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">Profile</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <p className="text-gray-400 text-sm">Name</p>
-              <p className="text-white text-lg font-medium">{user?.name || 'User'}</p>
+              <p className="text-gray-500 dark:text-gray-400 text-sm">Name</p>
+              <p className="text-gray-900 dark:text-white text-lg font-medium">{user?.name || 'User'}</p>
             </div>
             <div>
-              <p className="text-gray-400 text-sm">Email</p>
-              <p className="text-white text-lg font-medium">{user?.email || 'user@example.com'}</p>
+              <p className="text-gray-500 dark:text-gray-400 text-sm">Email</p>
+              <p className="text-gray-900 dark:text-white text-lg font-medium">{user?.email || 'user@example.com'}</p>
             </div>
           </div>
         </div>
 
         {/* Budget Section */}
-        <div className="bg-gray-800 p-6 rounded-lg shadow-md border border-gray-700 mb-8">
-          <h2 className="text-xl font-bold text-white mb-4">Financial Preferences</h2>
+        <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md border border-gray-200 dark:border-gray-700 mb-8 transition-colors">
+          <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">Financial Preferences</h2>
           
           {loading ? (
-            <p className="text-gray-400">Loading settings...</p>
+            <p className="text-gray-500 dark:text-gray-400">Loading settings...</p>
           ) : (
             <form onSubmit={handleSave}>
               <div className="mb-4 max-w-sm">
-                <label className="block text-gray-300 text-sm font-bold mb-2">
+                <label className="block text-gray-700 dark:text-gray-300 text-sm font-bold mb-2">
                   Monthly Budget (₹)
                 </label>
                 <input
                   type="number"
                   value={budget}
                   onChange={(e) => setBudget(e.target.value)}
-                  className="w-full px-3 py-2 bg-gray-700 text-white rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white border border-gray-300 dark:border-transparent rounded focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors"
                   required
                   min="0"
                 />
@@ -109,9 +109,9 @@ const Settings = () => {
         </div>
 
         {/* Logout Section */}
-        <div className="bg-gray-800 p-6 rounded-lg shadow-md border border-gray-700 border-l-4 border-l-red-500">
-          <h2 className="text-xl font-bold text-white mb-2">Account Actions</h2>
-          <p className="text-gray-400 mb-6 text-sm">
+        <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md border border-gray-200 dark:border-gray-700 border-l-4 border-l-red-500 transition-colors">
+          <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-2">Account Actions</h2>
+          <p className="text-gray-600 dark:text-gray-400 mb-6 text-sm">
             Logging out will clear your session securely. You will need to log back in to access your dashboard.
           </p>
           <button

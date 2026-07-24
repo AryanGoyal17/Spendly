@@ -16,14 +16,14 @@ const Dashboard = () => {
   });
 
   return (
-    <div className="p-8 text-white bg-gray-900 min-h-screen">
+    <div className="p-8 text-gray-900 dark:text-white bg-gray-50 dark:bg-gray-900 min-h-screen transition-colors">
       
       {/* Top: Welcome Message + Current Date */}
       <div className="mb-8">
         <h1 className="text-3xl font-bold">
           Welcome back, {user?.name || 'User'}! 👋
         </h1>
-        <p className="text-gray-400 mt-2">{todayDate}</p>
+        <p className="text-gray-600 dark:text-gray-400 mt-2">{todayDate}</p>
       </div>
 
       {/* Row 1: Summary Cards Grid */}

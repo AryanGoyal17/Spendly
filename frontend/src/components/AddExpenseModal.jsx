@@ -68,8 +68,8 @@ const AddExpenseModal = ({ isOpen, onClose, onExpenseAdded, expenseToEdit }) => 
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center p-4 z-50">
-      <div className="bg-gray-800 rounded shadow-lg w-full max-w-md p-6">
-        <h2 className="text-2xl font-bold text-white mb-4">
+      <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded shadow-xl w-full max-w-md p-6 transition-colors">
+        <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
           {expenseToEdit ? 'Edit Expense' : 'Add Expense'}
         </h2>
         
@@ -77,13 +77,13 @@ const AddExpenseModal = ({ isOpen, onClose, onExpenseAdded, expenseToEdit }) => 
         
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           <div>
-            <label className="text-gray-400 text-sm mb-1 block">Amount (₹)</label>
-            <input type="number" name="amount" value={formData.amount} onChange={handleChange} required min="1" className="w-full p-2 rounded bg-gray-700 text-white" />
+            <label className="text-gray-700 dark:text-gray-400 text-sm mb-1 block">Amount (₹)</label>
+            <input type="number" name="amount" value={formData.amount} onChange={handleChange} required min="1" className="w-full p-2 rounded bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white border border-gray-300 dark:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors" />
           </div>
           
           <div>
-            <label className="text-gray-400 text-sm mb-1 block">Category</label>
-            <select name="category" value={formData.category} onChange={handleChange} required className="w-full p-2 rounded bg-gray-700 text-white">
+            <label className="text-gray-700 dark:text-gray-400 text-sm mb-1 block">Category</label>
+            <select name="category" value={formData.category} onChange={handleChange} required className="w-full p-2 rounded bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white border border-gray-300 dark:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors">
               <option value="Food">Food</option>
               <option value="Transport">Transport</option>
               <option value="Shopping">Shopping</option>
@@ -95,17 +95,17 @@ const AddExpenseModal = ({ isOpen, onClose, onExpenseAdded, expenseToEdit }) => 
           </div>
           
           <div>
-            <label className="text-gray-400 text-sm mb-1 block">Date</label>
-            <input type="date" name="date" value={formData.date} onChange={handleChange} required className="w-full p-2 rounded bg-gray-700 text-white" />
+            <label className="text-gray-700 dark:text-gray-400 text-sm mb-1 block">Date</label>
+            <input type="date" name="date" value={formData.date} onChange={handleChange} required className="w-full p-2 rounded bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white border border-gray-300 dark:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors" />
           </div>
           
           <div>
-            <label className="text-gray-400 text-sm mb-1 block">Note (Optional)</label>
-            <input type="text" name="note" value={formData.note} onChange={handleChange} className="w-full p-2 rounded bg-gray-700 text-white" placeholder="What was this for?" />
+            <label className="text-gray-700 dark:text-gray-400 text-sm mb-1 block">Note (Optional)</label>
+            <input type="text" name="note" value={formData.note} onChange={handleChange} className="w-full p-2 rounded bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white border border-gray-300 dark:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors" placeholder="What was this for?" />
           </div>
           
           <div className="flex justify-end gap-3 mt-4">
-            <button type="button" onClick={onClose} className="px-4 py-2 text-gray-400 hover:text-white">Cancel</button>
+            <button type="button" onClick={onClose} className="px-4 py-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors">Cancel</button>
             <button type="submit" disabled={loading} className="px-4 py-2 bg-green-500 text-white rounded font-bold hover:bg-green-600 disabled:opacity-50">
               {loading ? 'Saving...' : expenseToEdit ? 'Update Expense' : 'Add Expense'}
             </button>

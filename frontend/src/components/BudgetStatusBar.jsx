@@ -58,18 +58,18 @@ const BudgetStatusBar = () => {
   const barWidth = percentage > 100 ? 100 : percentage;
 
   return (
-    <div className="bg-gray-800 p-6 rounded-lg shadow-md border border-gray-700">
+    <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md border border-gray-200 dark:border-gray-700 transition-colors">
       <div className="flex justify-between items-end mb-2">
-        <h3 className="text-xl font-bold text-white">Monthly Budget Status</h3>
-        <p className="text-gray-400 font-medium text-sm">
-          You have spent <span className="text-white font-bold">₹{spent.toLocaleString()}</span> of your <span className="text-white font-bold">₹{budget.toLocaleString()}</span> budget
+        <h3 className="text-xl font-bold text-gray-900 dark:text-white">Monthly Budget Status</h3>
+        <p className="text-gray-600 dark:text-gray-400 font-medium text-sm">
+          You have spent <span className="text-gray-900 dark:text-white font-bold">₹{spent.toLocaleString()}</span> of your <span className="text-gray-900 dark:text-white font-bold">₹{budget.toLocaleString()}</span> budget
         </p>
       </div>
 
       {budget === 0 ? (
         <p className="text-yellow-500 text-sm mt-2">No budget set. You can update your budget in Settings.</p>
       ) : (
-        <div className="w-full bg-gray-700 rounded-full h-4 mt-4 overflow-hidden">
+        <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-4 mt-4 overflow-hidden">
           <div 
             className={`${barColor} h-4 rounded-full transition-all duration-500`}
             style={{ width: `${barWidth}%` }}

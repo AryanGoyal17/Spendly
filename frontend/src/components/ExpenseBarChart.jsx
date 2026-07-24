@@ -76,7 +76,7 @@ const ExpenseBarChart = () => {
 
   if (totalSpent === 0) {
     return (
-      <div className="bg-gray-800 p-6 rounded-lg shadow-md h-96 flex flex-col items-center justify-center text-gray-400 border border-gray-700">
+      <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md h-96 flex flex-col items-center justify-center text-gray-500 dark:text-gray-400 border border-gray-200 dark:border-gray-700 transition-colors">
         <div className="text-5xl mb-3 opacity-50">📊</div>
         <p>No data for the last 6 months.</p>
       </div>
@@ -84,8 +84,8 @@ const ExpenseBarChart = () => {
   }
 
   return (
-    <div className="bg-gray-800 p-6 rounded-lg shadow-md h-96">
-      <h3 className="text-xl font-bold text-white mb-4">Spending (Last 6 Months)</h3>
+    <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md h-96 border border-gray-200 dark:border-gray-700 transition-colors">
+      <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">Spending (Last 6 Months)</h3>
       <ResponsiveContainer width="100%" height="80%">
         <BarChart data={data} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
           {/* Subtle horizontal grid lines */}

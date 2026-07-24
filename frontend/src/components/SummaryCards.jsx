@@ -79,27 +79,27 @@ const SummaryCards = () => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
       {/* Total Spent Card */}
-      <div className="bg-gray-800 p-6 rounded-lg shadow-md border-l-4 border-green-500">
-        <p className="text-gray-400 text-sm font-medium">Total Spent (This Month)</p>
-        <h3 className="text-3xl font-bold text-white mt-2">₹{stats.totalSpent.toLocaleString()}</h3>
+      <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md border-l-4 border-green-500 transition-colors">
+        <p className="text-gray-500 dark:text-gray-400 text-sm font-medium">Total Spent (This Month)</p>
+        <h3 className="text-3xl font-bold text-gray-900 dark:text-white mt-2">₹{stats.totalSpent.toLocaleString()}</h3>
       </div>
 
       {/* Transaction Count Card */}
-      <div className="bg-gray-800 p-6 rounded-lg shadow-md border-l-4 border-blue-500">
-        <p className="text-gray-400 text-sm font-medium">Transactions</p>
-        <h3 className="text-3xl font-bold text-white mt-2">{stats.transactionCount}</h3>
+      <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md border-l-4 border-blue-500 transition-colors">
+        <p className="text-gray-500 dark:text-gray-400 text-sm font-medium">Transactions</p>
+        <h3 className="text-3xl font-bold text-gray-900 dark:text-white mt-2">{stats.transactionCount}</h3>
       </div>
 
       {/* Highest Category Card */}
-      <div className="bg-gray-800 p-6 rounded-lg shadow-md border-l-4 border-purple-500">
-        <p className="text-gray-400 text-sm font-medium">Highest Spend Category</p>
-        <h3 className="text-2xl font-bold text-white mt-2 truncate">{stats.highestCategory}</h3>
+      <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md border-l-4 border-purple-500 transition-colors">
+        <p className="text-gray-500 dark:text-gray-400 text-sm font-medium">Highest Spend Category</p>
+        <h3 className="text-2xl font-bold text-gray-900 dark:text-white mt-2 truncate">{stats.highestCategory}</h3>
       </div>
 
       {/* Average Daily Spend Card */}
-      <div className="bg-gray-800 p-6 rounded-lg shadow-md border-l-4 border-orange-500">
-        <p className="text-gray-400 text-sm font-medium">Avg. Daily Spend</p>
-        <h3 className="text-3xl font-bold text-white mt-2">₹{stats.averageDaily}</h3>
+      <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md border-l-4 border-orange-500 transition-colors">
+        <p className="text-gray-500 dark:text-gray-400 text-sm font-medium">Avg. Daily Spend</p>
+        <h3 className="text-3xl font-bold text-gray-900 dark:text-white mt-2">₹{stats.averageDaily}</h3>
       </div>
     </div>
   );

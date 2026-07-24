@@ -17,7 +17,7 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="bg-gray-800 border-b border-gray-700 p-4 sticky top-0 z-50 shadow-md">
+    <nav className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 p-4 sticky top-0 z-50 shadow-md transition-colors">
       <div className="max-w-7xl mx-auto flex justify-between items-center">
         
         {/* Left side: App Name */}
@@ -37,8 +37,8 @@ const Navbar = () => {
                 to={link.path}
                 className={`text-sm font-medium transition-colors ${
                   isActive 
-                    ? 'text-white border-b-2 border-blue-500 pb-1' 
-                    : 'text-gray-400 hover:text-white hover:border-b-2 hover:border-gray-500 pb-1'
+                    ? 'text-blue-600 dark:text-blue-400 border-b-2 border-blue-600 dark:border-blue-400 pb-1' 
+                    : 'text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white hover:border-b-2 hover:border-gray-300 dark:hover:border-gray-500 pb-1'
                 }`}
               >
                 {link.name}
@@ -67,13 +67,13 @@ const Navbar = () => {
       </div>
       
       {/* Mobile Navigation (Bottom row for small screens) */}
-      <div className="md:hidden flex justify-around mt-4 pt-4 border-t border-gray-700">
+      <div className="md:hidden flex justify-around mt-4 pt-4 border-t border-gray-200 dark:border-gray-700">
         {navLinks.map((link) => (
           <Link
             key={link.name}
             to={link.path}
             className={`text-sm font-medium ${
-              location.pathname === link.path ? 'text-blue-500' : 'text-gray-400'
+              location.pathname === link.path ? 'text-blue-600 dark:text-blue-400' : 'text-gray-600 dark:text-gray-400'
             }`}
           >
             {link.name}
