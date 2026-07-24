@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useAuth } from '../context/AuthContext';
 import AddExpenseModal from '../components/AddExpenseModal';
 import Spinner from '../components/Spinner';
+import toast from 'react-hot-toast';
 
 const Expenses = () => {
   const { token } = useAuth();
@@ -57,9 +58,10 @@ const Expenses = () => {
       await axios.delete(`http://localhost:5000/api/expenses/${id}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
+      toast.success('Expense deleted successfully!');
       fetchExpenses();
     } catch (err) {
-      alert('Failed to delete expense');
+      toast.error('Failed to delete expense');
     }
   };
 

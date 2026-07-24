@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useAuth } from '../context/AuthContext';
+import toast from 'react-hot-toast';
 
 const AddExpenseModal = ({ isOpen, onClose, onExpenseAdded, expenseToEdit }) => {
   const { token } = useAuth();
@@ -47,15 +48,19 @@ const AddExpenseModal = ({ isOpen, onClose, onExpenseAdded, expenseToEdit }) => 
       if (expenseToEdit) {
         // Edit Mode: PUT request
         await axios.put(`http://localhost:5000/api/expenses/${expenseToEdit._id}`, formData, config);
+        toast.success('Expense updated!');
       } else {
         // Add Mode: POST request
         await axios.post('http://localhost:5000/api/expenses', formData, config);
+        toast.success('Expense added successfully!');
       }
       
       onExpenseAdded(); 
       onClose();
     } catch (err) {
-      setError(err.response?.data?.message || `Failed to ${expenseToEdit ? 'update' : 'add'} expense`);
+      const errorMsg = err.response?.data?.message || `Failed to ${expenseToEdit ? 'update' : 'add'} expense`;
+      setError(errorMsg);
+      toast.error(errorMsg);
     } finally {
       setLoading(false);
     }

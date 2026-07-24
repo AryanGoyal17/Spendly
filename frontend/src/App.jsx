@@ -1,4 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
+import { Toaster } from 'react-hot-toast';
 import Navbar from './components/Navbar';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
@@ -10,6 +11,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 function App() {
   return (
     <>
+      <Toaster position="bottom-right" toastOptions={{ duration: 3000 }} />
       <Navbar />
       <Routes>
       {/* Public Routes */}
