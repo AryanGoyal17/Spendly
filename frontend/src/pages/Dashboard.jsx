@@ -2,6 +2,7 @@ import { useAuth } from '../context/AuthContext';
 import SummaryCards from '../components/SummaryCards';
 import ExpensePieChart from '../components/ExpensePieChart';
 import ExpenseBarChart from '../components/ExpenseBarChart';
+import BudgetStatusBar from '../components/BudgetStatusBar';
 
 const Dashboard = () => {
   const { user } = useAuth(); // Grab the logged-in user to say hello
@@ -34,12 +35,8 @@ const Dashboard = () => {
         <ExpenseBarChart />
       </div>
 
-      {/* Row 3: Budget Status Bar (Placeholder for Next Step) */}
-      <div className="bg-gray-800 p-6 rounded-lg shadow-md border border-gray-700 border-dashed flex items-center justify-center">
-        <h3 className="text-xl font-bold text-gray-500">
-          Budget Status Bar (Coming in Step 5!)
-        </h3>
-      </div>
+      {/* Row 3: Budget Status Bar */}
+      <BudgetStatusBar />
       
     </div>
   );
