@@ -74,7 +74,7 @@ const ExpensePieChart = () => {
 
   return (
     <div className="bg-gray-800 p-6 rounded-lg shadow-md h-96">
-      <h3 className="text-xl font-bold text-white mb-4">Spending by Category</h3>
+      <h3 className="text-xl font-bold text-white mb-4">Spending by Category (This Month)</h3>
       
       {/* ResponsiveContainer makes sure the chart shrinks/grows with the screen size */}
       <ResponsiveContainer width="100%" height="80%">
