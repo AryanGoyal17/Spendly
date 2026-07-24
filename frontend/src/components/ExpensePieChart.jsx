@@ -60,8 +60,9 @@ const ExpensePieChart = () => {
 
   if (data.length === 0) {
     return (
-      <div className="bg-gray-800 p-6 rounded-lg shadow-md h-96 flex items-center justify-center">
-        <p className="text-gray-400">No expenses recorded this month.</p>
+      <div className="bg-gray-800 p-6 rounded-lg shadow-md h-96 flex flex-col items-center justify-center text-gray-400 border border-gray-700">
+        <div className="text-5xl mb-3 opacity-50">🍩</div>
+        <p>No expenses this month to chart.</p>
       </div>
     );
   }

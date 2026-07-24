@@ -148,7 +148,19 @@ const Expenses = () => {
       {loading ? (
         <Spinner message="Loading expenses..." />
       ) : expenses.length === 0 ? (
-        <p className="text-gray-400">No expenses found matching your criteria.</p>
+        <div className="flex flex-col items-center justify-center py-20 px-4 text-center bg-gray-800/30 rounded-lg border-2 border-gray-700 border-dashed mt-4">
+          <div className="text-7xl mb-4 drop-shadow-lg animate-bounce">📭</div>
+          <h3 className="text-2xl font-bold text-white mb-2">No expenses yet!</h3>
+          <p className="text-gray-400 mb-6 max-w-sm">
+            It looks pretty quiet here. Add your first expense to start tracking your spending.
+          </p>
+          <button 
+            onClick={handleOpenNew}
+            className="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-8 rounded shadow-lg transition-colors"
+          >
+            + Add Expense
+          </button>
+        </div>
       ) : (
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse">

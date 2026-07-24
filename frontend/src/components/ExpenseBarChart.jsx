@@ -72,6 +72,17 @@ const ExpenseBarChart = () => {
 
   if (loading) return <Spinner message="Loading chart..." />;
 
+  const totalSpent = data.reduce((sum, item) => sum + item.value, 0);
+
+  if (totalSpent === 0) {
+    return (
+      <div className="bg-gray-800 p-6 rounded-lg shadow-md h-96 flex flex-col items-center justify-center text-gray-400 border border-gray-700">
+        <div className="text-5xl mb-3 opacity-50">📊</div>
+        <p>No data for the last 6 months.</p>
+      </div>
+    );
+  }
+
   return (
     <div className="bg-gray-800 p-6 rounded-lg shadow-md h-96">
       <h3 className="text-xl font-bold text-white mb-4">Spending (Last 6 Months)</h3>
