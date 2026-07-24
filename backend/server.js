@@ -18,7 +18,10 @@ const app = express(); //App represnts the server which handles and manages rout
 
 //A-- Allowing frontend to make requests to backend(enabling frontend-backend communication)
 
-app.use(cors());
+app.use(cors({
+    origin: [process.env.FRONTEND_URL || 'http://localhost:5173'],
+    credentials: true
+}));
 
 //B-- Setting up express.json
 // express.json is a middleware that converts incoming JSON to javascript object and stores it in req.body
@@ -52,7 +55,7 @@ app.get('/ping', (req, res) => {
 
 //7-- Defining the port--
 
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 
 //8-- Starting the server and asking it to listen to the requests coming from PORT 5000
 
