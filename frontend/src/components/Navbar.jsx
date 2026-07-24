@@ -1,8 +1,10 @@
 import { Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { useTheme } from '../context/ThemeContext';
 
 const Navbar = () => {
   const { logout, token } = useAuth();
+  const { theme, toggleTheme } = useTheme();
   const location = useLocation();
 
   // If there's no token, don't show the navbar (so it hides on login/signup pages)
@@ -45,8 +47,16 @@ const Navbar = () => {
           })}
         </div>
 
-        {/* Right side: Logout Button */}
-        <div>
+        {/* Right side: Actions */}
+        <div className="flex items-center space-x-4">
+          <button
+            onClick={toggleTheme}
+            className="p-2 rounded-full hover:bg-gray-700 dark:hover:bg-gray-600 transition-colors text-xl"
+            aria-label="Toggle theme"
+          >
+            {theme === 'dark' ? '☀️' : '🌙'}
+          </button>
+          
           <button
             onClick={logout}
             className="bg-red-600/10 hover:bg-red-600/20 text-red-500 border border-red-500/50 px-4 py-2 rounded-lg text-sm font-bold transition-all"
