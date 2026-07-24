@@ -14,7 +14,7 @@ const Settings = () => {
   useEffect(() => {
     const fetchBudget = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/user/me', {
+        const response = await axios.get(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/user/me`, {
           headers: { Authorization: `Bearer ${token}` }
         });
         setBudget(response.data.monthlyBudget || 0);
@@ -36,7 +36,7 @@ const Settings = () => {
 
     try {
       await axios.put(
-        'http://localhost:5000/api/user/budget',
+        `${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/user/budget`,
         { monthlyBudget: Number(budget) },
         { headers: { Authorization: `Bearer ${token}` } }
       );

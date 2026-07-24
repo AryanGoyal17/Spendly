@@ -41,7 +41,7 @@ const ExpenseBarChart = () => {
 
         // Fetch expenses for the entire 6-month window
         const response = await axios.get(
-          `http://localhost:5000/api/expenses?startDate=${startDate}&endDate=${endDate}`, 
+          `${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/expenses?startDate=${startDate}&endDate=${endDate}`, 
           { headers: { Authorization: `Bearer ${token}` } }
         );
 

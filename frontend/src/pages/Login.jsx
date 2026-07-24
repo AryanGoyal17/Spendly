@@ -18,7 +18,7 @@ const Login = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const response = await axios.post('http://localhost:5000/api/auth/login', formData);
+      const response = await axios.post(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/auth/login`, formData);
       login(
         { _id: response.data._id, name: response.data.name, email: response.data.email, monthlyBudget: response.data.monthlyBudget }, 
         response.data.token

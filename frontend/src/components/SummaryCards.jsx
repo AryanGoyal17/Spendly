@@ -30,7 +30,7 @@ const SummaryCards = () => {
 
         // Fetch only this month's expenses using our backend filters
         const response = await axios.get(
-          `http://localhost:5000/api/expenses?startDate=${firstDay}&endDate=${lastDay}`, 
+          `${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/expenses?startDate=${firstDay}&endDate=${lastDay}`, 
           { headers: { Authorization: `Bearer ${token}` } }
         );
 

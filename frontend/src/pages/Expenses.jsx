@@ -32,7 +32,7 @@ const Expenses = () => {
       if (filters.endDate) params.append('endDate', filters.endDate);
       
       const queryString = params.toString();
-      const url = `http://localhost:5000/api/expenses${queryString ? `?${queryString}` : ''}`;
+      const url = `${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/expenses${queryString ? `?${queryString}` : ''}`;
       
       const response = await axios.get(url, {
         headers: { Authorization: `Bearer ${token}` }
@@ -55,7 +55,7 @@ const Expenses = () => {
     if (!window.confirm('Are you sure you want to delete this expense?')) return;
     
     try {
-      await axios.delete(`http://localhost:5000/api/expenses/${id}`, {
+      await axios.delete(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/expenses/${id}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       toast.success('Expense deleted successfully!');

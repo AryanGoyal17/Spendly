@@ -15,7 +15,7 @@ const BudgetStatusBar = () => {
         const config = { headers: { Authorization: `Bearer ${token}` } };
         
         // 1. Fetch User Data to get the budget
-        const userRes = await axios.get('http://localhost:5000/api/user/me', config);
+        const userRes = await axios.get(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/user/me`, config);
         setBudget(userRes.data.monthlyBudget || 0);
 
         // 2. Fetch Current Month Expenses to get total spent
@@ -27,7 +27,7 @@ const BudgetStatusBar = () => {
         const lastDay = `${year}-${month}-${String(lastDayDate.getDate()).padStart(2, '0')}`;
 
         const expRes = await axios.get(
-          `http://localhost:5000/api/expenses?startDate=${firstDay}&endDate=${lastDay}`, 
+          `${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/expenses?startDate=${firstDay}&endDate=${lastDay}`, 
           config
         );
 

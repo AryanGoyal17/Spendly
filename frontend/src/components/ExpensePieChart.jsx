@@ -24,7 +24,7 @@ const ExpensePieChart = () => {
         const lastDay = `${year}-${month}-${String(lastDayDate.getDate()).padStart(2, '0')}`;
 
         const response = await axios.get(
-          `http://localhost:5000/api/expenses?startDate=${firstDay}&endDate=${lastDay}`, 
+          `${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/expenses?startDate=${firstDay}&endDate=${lastDay}`, 
           { headers: { Authorization: `Bearer ${token}` } }
         );
 

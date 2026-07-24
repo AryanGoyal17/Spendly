@@ -47,11 +47,11 @@ const AddExpenseModal = ({ isOpen, onClose, onExpenseAdded, expenseToEdit }) => 
       
       if (expenseToEdit) {
         // Edit Mode: PUT request
-        await axios.put(`http://localhost:5000/api/expenses/${expenseToEdit._id}`, formData, config);
+        await axios.put(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/expenses/${expenseToEdit._id}`, formData, config);
         toast.success('Expense updated!');
       } else {
         // Add Mode: POST request
-        await axios.post('http://localhost:5000/api/expenses', formData, config);
+        await axios.post(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/expenses`, formData, config);
         toast.success('Expense added successfully!');
       }
       
